@@ -560,7 +560,6 @@ public class MethodRetrievalProcessor implements ModelElementProcessor<Void, Lis
         return "";
     }
 
-
     private String getValueMapperTargetPrefix(ExecutableElement method) {
         ValueMappingsPrism mappingsAnnotation = ValueMappingsPrism.getInstanceOn( method );
 

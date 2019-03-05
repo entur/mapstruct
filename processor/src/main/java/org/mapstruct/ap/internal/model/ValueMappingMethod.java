@@ -15,7 +15,6 @@ import java.util.Set;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Types;
 
-import org.mapstruct.MappingConstants;
 import org.mapstruct.ap.internal.model.common.Parameter;
 import org.mapstruct.ap.internal.model.source.ForgedMethod;
 import org.mapstruct.ap.internal.model.source.ForgedMethodHistory;
@@ -147,9 +146,20 @@ public class ValueMappingMethod extends MappingMethod {
                 for ( String sourceConstant : new ArrayList<>( unmappedSourceConstants ) ) {
 
                     String sourcePrefix = method.getMappingOptions().getValueMappingSourcePrefix();
-                    String sourceName = isMappingConstant( sourceConstant ) ? sourceConstant : sourceConstant.replaceFirst( sourcePrefix, "" );
+
+                    if ( null == sourcePrefix ) {
+                        sourcePrefix = "";
+                    }
+
+                    String sourceName = isMappingConstant( sourceConstant ) ? sourceConstant :
+                        sourceConstant.replaceFirst( sourcePrefix, "" );
 
                     String targetPrefix = method.getMappingOptions().getValueMappingTargetPrefix();
+
+                    if ( null == targetPrefix ) {
+                        targetPrefix = "";
+                    }
+
                     String targetName = isMappingConstant( sourceConstant ) ? sourceName : targetPrefix + sourceName;
 
                     if ( targetConstants.contains( targetName ) ) {
@@ -182,7 +192,9 @@ public class ValueMappingMethod extends MappingMethod {
         }
 
         private boolean isMappingConstant(String name) {
-            return MappingConstants.NULL.equals( name ) || MappingConstants.ANY_UNMAPPED.equals( name ) || MappingConstants.ANY_REMAINING.equals( name );
+            return org.mapstruct.MappingConstants.NULL.equals( name )
+                || org.mapstruct.MappingConstants.ANY_UNMAPPED.equals( name )
+                || org.mapstruct.MappingConstants.ANY_REMAINING.equals( name );
         }
 
         private SelectionParameters getSelectionParameters(Method method, Types typeUtils) {

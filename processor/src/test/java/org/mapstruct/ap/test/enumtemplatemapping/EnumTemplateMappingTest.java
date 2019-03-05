@@ -1,3 +1,8 @@
+/*
+ * Copyright MapStruct Authors.
+ *
+ * Licensed under the Apache License version 2.0, available at http://www.apache.org/licenses/LICENSE-2.0
+ */
 package org.mapstruct.ap.test.enumtemplatemapping;
 
 import org.junit.Assert;
@@ -30,9 +35,6 @@ public class EnumTemplateMappingTest {
         Enum1DTO t1 = Enum1DTO.VALUE1;
         Enum1Domain d1 = EnumMapper1.INSTANCE.map( t1 );
 
-        System.out.println(t1);
-        System.out.println(d1);
-
         Assert.assertEquals( Enum1Domain.DOMAIN_VALUE1, d1 );
     }
 
@@ -43,16 +45,10 @@ public class EnumTemplateMappingTest {
         Enum1ExtraValueDTO t1 = Enum1ExtraValueDTO.VALUE1;
         Enum1ExtraValueDomain d1 = EnumMapper1.INSTANCE.map( t1 );
 
-        System.out.println(t1);
-        System.out.println(d1);
-
         Assert.assertEquals( Enum1ExtraValueDomain.DOMAIN_VALUE1, d1 );
 
         Enum1ExtraValueDTO t2 = Enum1ExtraValueDTO.EXTRA_VALUE3;
         Enum1ExtraValueDomain d2 = EnumMapper1.INSTANCE.map( t2 );
-
-        System.out.println(t2);
-        System.out.println(d2);
 
         Assert.assertEquals( Enum1ExtraValueDomain.CUSTOM_VALUE3, d2 );
     }
@@ -64,16 +60,10 @@ public class EnumTemplateMappingTest {
         Enum1ExtraValueDTO t1 = Enum1ExtraValueDTO.VALUE1;
         Enum1Domain d1 = EnumMapper1.INSTANCE.mapSourceExtraValue( t1 );
 
-        System.out.println(t1);
-        System.out.println(d1);
-
         Assert.assertEquals( Enum1Domain.DOMAIN_VALUE1, d1 );
 
         Enum1ExtraValueDTO t2 = Enum1ExtraValueDTO.EXTRA_VALUE3;
         Enum1Domain d2 = EnumMapper1.INSTANCE.mapSourceExtraValue( t2 );
-
-        System.out.println(t2);
-        System.out.println(d2);
 
         Assert.assertNull( d2 );
     }
@@ -85,9 +75,6 @@ public class EnumTemplateMappingTest {
         Enum2DTO t2 = Enum2DTO.DTO_VALUE1;
         Enum2Domain d2 = EnumMapper1.INSTANCE.map( t2 );
 
-        System.out.println(t2);
-        System.out.println(d2);
-
         Assert.assertEquals( Enum2Domain.VALUE1, d2 );
     }
 
@@ -98,16 +85,10 @@ public class EnumTemplateMappingTest {
         Enum2ExtraValueDTO t1 = Enum2ExtraValueDTO.DTO_VALUE1;
         Enum2ExtraValueDomain d1 = EnumMapper1.INSTANCE.map( t1 );
 
-        System.out.println(t1);
-        System.out.println(d1);
-
         Assert.assertEquals( Enum2ExtraValueDomain.VALUE1, d1 );
 
         Enum2ExtraValueDTO t2 = Enum2ExtraValueDTO.EXTRA_VALUE3;
         Enum2ExtraValueDomain d2 = EnumMapper1.INSTANCE.map( t2 );
-
-        System.out.println(t2);
-        System.out.println(d2);
 
         Assert.assertEquals( Enum2ExtraValueDomain.CUSTOM_VALUE3, d2 );
     }
@@ -119,16 +100,10 @@ public class EnumTemplateMappingTest {
         Enum2ExtraValueDTO t1 = Enum2ExtraValueDTO.DTO_VALUE1;
         Enum2Domain d1 = EnumMapper1.INSTANCE.mapSourceExtraValue( t1 );
 
-        System.out.println(t1);
-        System.out.println(d1);
-
         Assert.assertEquals( Enum2Domain.VALUE1, d1 );
 
         Enum2ExtraValueDTO t2 = Enum2ExtraValueDTO.EXTRA_VALUE3;
         Enum2Domain d2 = EnumMapper1.INSTANCE.mapSourceExtraValue( t2 );
-
-        System.out.println(t2);
-        System.out.println(d2);
 
         Assert.assertNull( d2 );
     }
@@ -140,9 +115,6 @@ public class EnumTemplateMappingTest {
         Enum3DTO t2 = Enum3DTO.DTO_VALUE1;
         Enum3Domain d2 = EnumMapper1.INSTANCE.map( t2 );
 
-        System.out.println(t2);
-        System.out.println(d2);
-
         Assert.assertEquals( Enum3Domain.DOMAIN_VALUE1, d2 );
     }
 
@@ -153,16 +125,10 @@ public class EnumTemplateMappingTest {
         Enum3ExtraValueDTO t1 = Enum3ExtraValueDTO.DTO_VALUE1;
         Enum3ExtraValueDomain d1 = EnumMapper1.INSTANCE.map( t1 );
 
-        System.out.println(t1);
-        System.out.println(d1);
-
         Assert.assertEquals( Enum3ExtraValueDomain.DOMAIN_VALUE1, d1 );
 
         Enum3ExtraValueDTO t2 = Enum3ExtraValueDTO.EXTRA_VALUE3;
         Enum3ExtraValueDomain d2 = EnumMapper1.INSTANCE.map( t2 );
-
-        System.out.println(t2);
-        System.out.println(d2);
 
         Assert.assertEquals( Enum3ExtraValueDomain.CUSTOM_VALUE3, d2 );
     }
@@ -174,16 +140,10 @@ public class EnumTemplateMappingTest {
         Enum3ExtraValueDTO t1 = Enum3ExtraValueDTO.DTO_VALUE1;
         Enum3Domain d1 = EnumMapper1.INSTANCE.mapSourceExtraValue( t1 );
 
-        System.out.println(t1);
-        System.out.println(d1);
-
         Assert.assertEquals( Enum3Domain.DOMAIN_VALUE1, d1 );
 
         Enum3ExtraValueDTO t2 = Enum3ExtraValueDTO.EXTRA_VALUE3;
         Enum3Domain d2 = EnumMapper1.INSTANCE.mapSourceExtraValue( t2 );
-
-        System.out.println(t2);
-        System.out.println(d2);
 
         Assert.assertNull( d2 );
     }
