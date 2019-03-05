@@ -35,24 +35,31 @@ public class MappingOptions {
         null,
         null,
         Collections.<ValueMapping>emptyList(),
-        false
+        false,
+        null,
+        null
     );
     private Map<String, List<Mapping>> mappings;
     private IterableMapping iterableMapping;
     private MapMapping mapMapping;
     private BeanMapping beanMapping;
     private List<ValueMapping> valueMappings;
+    private String valueMappingSourcePrefix;
+    private String valueMappingTargetPrefix;
     private boolean fullyInitialized;
     private final boolean restrictToDefinedMappings;
 
     public MappingOptions(Map<String, List<Mapping>> mappings, IterableMapping iterableMapping, MapMapping mapMapping,
-        BeanMapping beanMapping, List<ValueMapping> valueMappings, boolean restrictToDefinedMappings ) {
+        BeanMapping beanMapping, List<ValueMapping> valueMappings, boolean restrictToDefinedMappings, String valueMappingSourcePrefix,
+        String valueMappingTargetPrefix) {
         this.mappings = mappings;
         this.iterableMapping = iterableMapping;
         this.mapMapping = mapMapping;
         this.beanMapping = beanMapping;
         this.valueMappings = valueMappings;
         this.restrictToDefinedMappings = restrictToDefinedMappings;
+        this.valueMappingSourcePrefix = valueMappingSourcePrefix;
+        this.valueMappingTargetPrefix = valueMappingTargetPrefix;
     }
 
     /**
@@ -93,7 +100,9 @@ public class MappingOptions {
             null,
             forForgedMethods ? BeanMapping.forForgedMethods() : null,
             Collections.<ValueMapping>emptyList(),
-            restrictToDefinedMappings
+            restrictToDefinedMappings,
+            null,
+            null
         );
 
     }
@@ -166,6 +175,14 @@ public class MappingOptions {
 
     public List<ValueMapping> getValueMappings() {
         return valueMappings;
+    }
+
+    public String getValueMappingSourcePrefix() {
+        return valueMappingSourcePrefix;
+    }
+
+    public String getValueMappingTargetPrefix() {
+        return valueMappingTargetPrefix;
     }
 
     public void setMappings(Map<String, List<Mapping>> mappings) {

@@ -19,6 +19,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 public @interface ValueMappings {
 
+    String targetPrefix() default "";
+    String sourcePrefix() default "";
+
     ValueMapping[] value();
 
 }

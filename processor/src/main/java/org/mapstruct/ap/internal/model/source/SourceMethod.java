@@ -92,6 +92,8 @@ public class SourceMethod implements Method {
         private MapperConfiguration mapperConfig = null;
         private List<SourceMethod> prototypeMethods = Collections.emptyList();
         private List<ValueMapping> valueMappings;
+        private String valueMappingTargetPrefix;
+        private String valueMappingSourcePrefix;
         private ParameterProvidedMethods contextProvidedMethods;
 
         public Builder setDeclaringMapper(Type declaringMapper) {
@@ -184,10 +186,22 @@ public class SourceMethod implements Method {
             return this;
         }
 
+        public Builder setValueMapperTargetPrefix(String prefix) {
+            this.valueMappingTargetPrefix = prefix;
+            return this;
+        }
+
+        public Builder setValueMapperSourcePrefix(String prefix) {
+            this.valueMappingSourcePrefix = prefix;
+            return this;
+        }
+
         public SourceMethod build() {
 
             MappingOptions mappingOptions =
-                    new MappingOptions( mappings, iterableMapping, mapMapping, beanMapping, valueMappings, false );
+                    new MappingOptions( mappings, iterableMapping, mapMapping, beanMapping, valueMappings, false,
+                        valueMappingSourcePrefix, valueMappingTargetPrefix
+                    );
 
             SourceMethod sourceMethod = new SourceMethod( this, mappingOptions );
 

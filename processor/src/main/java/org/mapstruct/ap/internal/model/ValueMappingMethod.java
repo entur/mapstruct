@@ -15,6 +15,7 @@ import java.util.Set;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Types;
 
+import org.mapstruct.MappingConstants;
 import org.mapstruct.ap.internal.model.common.Parameter;
 import org.mapstruct.ap.internal.model.source.ForgedMethod;
 import org.mapstruct.ap.internal.model.source.ForgedMethodHistory;
@@ -144,8 +145,15 @@ public class ValueMappingMethod extends MappingMethod {
                 // get all target constants
                 List<String> targetConstants = method.getReturnType().getEnumConstants();
                 for ( String sourceConstant : new ArrayList<>( unmappedSourceConstants ) ) {
-                    if ( targetConstants.contains( sourceConstant ) ) {
-                        mappings.add( new MappingEntry( sourceConstant, sourceConstant ) );
+
+                    String sourcePrefix = method.getMappingOptions().getValueMappingSourcePrefix();
+                    String sourceName = isMappingConstant( sourceConstant ) ? sourceConstant : sourceConstant.replaceFirst( sourcePrefix, "" );
+
+                    String targetPrefix = method.getMappingOptions().getValueMappingTargetPrefix();
+                    String targetName = isMappingConstant( sourceConstant ) ? sourceName : targetPrefix + sourceName;
+
+                    if ( targetConstants.contains( targetName ) ) {
+                        mappings.add( new MappingEntry( sourceConstant, targetName ) );
                         unmappedSourceConstants.remove( sourceConstant );
                     }
                 }
@@ -171,6 +179,10 @@ public class ValueMappingMethod extends MappingMethod {
                 }
             }
             return mappings;
+        }
+
+        private boolean isMappingConstant(String name) {
+            return MappingConstants.NULL.equals( name ) || MappingConstants.ANY_UNMAPPED.equals( name ) || MappingConstants.ANY_REMAINING.equals( name );
         }
 
         private SelectionParameters getSelectionParameters(Method method, Types typeUtils) {

@@ -258,6 +258,8 @@ public class MethodRetrievalProcessor implements ModelElementProcessor<Void, Lis
             .setMapperConfiguration( mapperConfig )
             .setPrototypeMethods( prototypeMethods )
             .setContextProvidedMethods( contextProvidedMethods )
+            .setValueMapperSourcePrefix( getValueMapperSourcePrefix( method ) )
+            .setValueMapperTargetPrefix( getValueMapperTargetPrefix( method ) )
             .build();
     }
 
@@ -546,5 +548,26 @@ public class MethodRetrievalProcessor implements ModelElementProcessor<Void, Lis
         }
 
         return valueMappings;
+    }
+
+    private String getValueMapperSourcePrefix(ExecutableElement method) {
+        ValueMappingsPrism mappingsAnnotation = ValueMappingsPrism.getInstanceOn( method );
+
+        if ( mappingsAnnotation != null ) {
+            return mappingsAnnotation.sourcePrefix();
+        }
+
+        return "";
+    }
+
+
+    private String getValueMapperTargetPrefix(ExecutableElement method) {
+        ValueMappingsPrism mappingsAnnotation = ValueMappingsPrism.getInstanceOn( method );
+
+        if ( mappingsAnnotation != null ) {
+            return mappingsAnnotation.targetPrefix();
+        }
+
+        return "";
     }
 }
