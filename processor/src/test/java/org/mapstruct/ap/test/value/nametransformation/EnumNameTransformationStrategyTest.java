@@ -25,6 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
     CheeseTypeSuffixed.class,
     CheeseTypePrefixed.class,
     CheeseTypeCustomSuffix.class,
+    CheeseTypeProtobuf.class
 })
 public class EnumNameTransformationStrategyTest {
 
@@ -56,6 +57,23 @@ public class EnumNameTransformationStrategyTest {
             .isEqualTo( CheeseType.BRIE );
         assertThat( mapper.mapStripPrefix( CheeseTypePrefixed.SWISS_BRIE ) )
             .isEqualTo( CheeseType.BRIE );
+    }
+
+    @Test
+    @WithClasses({
+        CheeseProtobufMapper.class
+    })
+    public void shouldApplyPrefixAndStripPrefixOnEnumToEnumMappingForProtobuf() {
+        CheeseProtobufMapper mapper = CheeseProtobufMapper.INSTANCE;
+
+        assertThat( mapper.map( CheeseType.BRIE ) )
+            .isEqualTo( CheeseTypeProtobuf.CHEESE_TYPE_PROTOBUF_BRIE );
+        assertThat( mapper.map( null ) )
+            .isEqualTo( CheeseTypeProtobuf.CHEESE_TYPE_PROTOBUF_UNSPECIFIED );
+        assertThat( mapper.mapInheritInverse( CheeseTypeProtobuf.CHEESE_TYPE_PROTOBUF_BRIE ) )
+            .isEqualTo( CheeseType.BRIE );
+        assertThat( mapper.mapInheritInverse( CheeseTypeProtobuf.CHEESE_TYPE_PROTOBUF_UNSPECIFIED ) )
+            .isEqualTo( null );
     }
 
     @Test
